@@ -38,13 +38,34 @@ merged: a p b q c   d
 class Solution {
 public:
     std::string mergeAlternately(std::string word1, std::string word2) {
-        int total = word1.length() + word2.length();
-        std::string newstr;
+        int i, j = 0; //i and j are counters
+        std::string merge = ""; //new string, merge, returns the combintation of both word1 and word2
 
-        for(int i = 0; i < total-1; i++) {
-                newstr.append(word1[i],word2[i]);
-
+        /*
+            this while loop handles the edge case where both strings are even size.
+            adds letter of word1 first and alternates until end.
+        */
+        while(i < word1.size() && j < word2.size()) {
+            merge += word1[i++];
+            merge += word2[j++];
         }
+
+        /*
+            this while loop handles the case that word1 is longer, after intial while loop, this loop
+            will continue to add the remaining letters.
+        */
+        while(i < word1.size()) {
+            merge += word1[i++];
+        }
+
+        /*
+            this while loop handles the case that word2 is longer, after intial while loop, this loop
+            will continue to add the remaining letters.
+        */
+        while(j < word2.length()) {
+            merge += word2[j++];
+        }
+        return merge;
     }
 };
 
